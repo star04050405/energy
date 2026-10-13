@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>高能量女孩的一天</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="高能量一天">
+<style>
+:root{
+  --paper:#FBFAF7; --ink:#1E3A4C; --dim:#7A8A94; --line:#E7E2D6;
+  --water:#7FB5D5; --water-deep:#2E7DA6; --berry:#C96A8B; --sage:#8FAE8B; --sun:#F2C94C; --lav:#A8A2C8;
+  --serif:Georgia,"Songti SC","STSong","SimSun",serif;
+  --mono:ui-monospace,"SF Mono",Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);max-width:640px;margin:0 auto;padding:0 18px 80px;-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(rgba(127,181,213,.05) 1px,transparent 1px);background-size:100% 44px}
+header{padding:52px 0 0}
+.kick{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--water-deep);text-transform:uppercase}
+h1{font-size:34px;line-height:1.25;letter-spacing:.04em;margin:12px 0 4px;font-weight:700}
+h1 em{font-style:italic;color:var(--water-deep)}
+.dline{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.14em;margin-top:6px}
+.dline b{color:var(--ink)}
+.sub{font-size:14.5px;line-height:2;color:#4A5A64;margin-top:16px}
+.sub .h{color:var(--water-deep);font-weight:700}
+.hydration{margin-top:26px;border:1.5px solid var(--line);border-radius:18px;background:#FFF;padding:20px 18px 16px}
+.hy-top{display:flex;justify-content:space-between;align-items:baseline}
+.hy-top .t{font-size:15px;font-weight:700}
+.hy-top .n{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.cups{display:flex;gap:9px;margin:16px 0 10px;flex-wrap:wrap}
+.cup{width:34px;height:44px;border:1.6px solid var(--line);border-radius:5px 5px 10px 10px;position:relative;cursor:pointer;transition:all .25s;background:#FCFBF8}
+.cup i{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(180deg,#9CCBE4,#7FB5D5);border-radius:0 0 8px 8px;transition:height .35s ease}
+.cup.on{border-color:var(--water)}
+.cup.on i{height:74%}
+.cups-hint{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.1em}
+.challenge{margin-top:16px;border:1.5px solid var(--berry);background:#FBF1F4;border-radius:16px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+.challenge .ic{font-size:22px;line-height:1.2}
+.challenge .t{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--berry);margin-bottom:5px}
+.challenge .c{font-size:15.5px;line-height:1.7;font-weight:700}
+.day{margin-top:34px}
+.day-head{display:flex;align-items:baseline;gap:12px;border-bottom:1.5px solid var(--ink);padding-bottom:10px;margin-bottom:4px}
+.day-head .t{font-size:20px;font-weight:700;letter-spacing:.06em}
+.day-head .d{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.2em}
+.row{display:flex;gap:14px;padding:15px 0 13px;border-bottom:1px solid var(--line);position:relative;cursor:pointer}
+.row .tm{font-family:var(--mono);font-size:15px;font-weight:700;width:52px;flex:none;color:var(--ink);padding-top:2px}
+.row .rail{width:2px;flex:none;background:var(--line);border-radius:2px;position:relative;margin-top:4px}
+.row .rail:before{content:"";position:absolute;top:2px;left:-3.5px;width:9px;height:9px;border-radius:50%;background:var(--dot,#ccc)}
+.row.done .rail:before{box-shadow:0 0 0 3px color-mix(in srgb, var(--dot) 22%, transparent)}
+.row .body{flex:1;min-width:0}
+.row .cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--dim);margin-bottom:5px;display:flex;align-items:center;gap:8px}
+.row .cat .fix{border:1px solid var(--dim);border-radius:99px;padding:1px 8px;font-size:8.5px;letter-spacing:.18em}
+.row .txt{font-size:15.5px;line-height:1.75}
+.row .note{font-size:12.5px;color:var(--dim);line-height:1.7;margin-top:4px}
+.row.done .txt{color:var(--dim);text-decoration:line-through;text-decoration-color:rgba(122,138,148,.5);text-decoration-thickness:1px}
+.row.done .cat{opacity:.6}
+.tick{flex:none;width:22px;height:22px;border:1.4px solid var(--line);border-radius:50%;margin-top:3px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.row.done .tick{background:var(--ink);border-color:var(--ink)}
+.tick svg{width:11px;height:11px;stroke:#FBFAF7;stroke-width:3;fill:none;opacity:0;transition:opacity .2s}
+.row.done .tick svg{opacity:1}
+.rules{margin-top:38px;border-top:1.5px solid var(--ink);padding-top:22px}
+.rules h3{font-size:16px;letter-spacing:.1em;margin-bottom:12px}
+.rules .g{display:grid;grid-template-columns:1fr;gap:9px}
+.rules .r{font-size:13.5px;line-height:1.8;color:#4A5A64;display:flex;gap:10px}
+.rules .r b{color:var(--ink)}
+.rules .r .no{font-family:var(--mono);color:var(--water-deep);font-size:11px;padding-top:2px}
+footer{margin-top:30px;font-family:var(--mono);font-size:9.5px;color:var(--dim);letter-spacing:.16em;line-height:2;display:flex;justify-content:space-between;align-items:center;gap:14px}
+footer .dis{max-width:72%}
+.cf{position:fixed;z-index:99;pointer-events:none;border-radius:50%}
+#toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(18px);opacity:0;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.14em;padding:10px 20px;border-radius:99px;transition:all .3s;pointer-events:none;z-index:99}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:420px){h1{font-size:29px}.row .tm{width:46px;font-size:13.5px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kick">DAILY GLOW /// EVERY DAY, A NEW PAGE</div>
+  <h1>高能量女孩的一天<br><em id="hero"></em></h1>
+  <div class="dline" id="dline"></div>
+  <p class="sub" id="sub"></p>
+</header>
+
+<section class="hydration">
+  <div class="hy-top"><span class="t">💧 今日大水计划</span><span class="n" id="hyN">0 ml</span></div>
+  <div class="cups" id="cups"></div>
+  <div class="cups-hint">点击杯子记录 · 每天归零 · 睡前 2 小时收口</div>
+</section>
+
+<section class="challenge" id="challenge">
+  <div class="ic">🎯</div>
+  <div><div class="t">TODAY'S LITTLE QUEST</div><div class="c" id="chTxt"></div></div>
+</section>
+
+<main class="day">
+  <div class="day-head"><span class="t">时间轴</span><span class="d" id="tlMeta"></span></div>
+  <div id="rows"></div>
+</main>
+
+<section class="rules">
+  <h3>抗炎饮食的三条底线</h3>
+  <div class="g">
+    <div class="r"><span class="no">01</span><span><b>把彩虹吃够</b>——每天 5 种颜色的蔬果，花青素、番茄红素、类胡萝卜素各司其职。</span></div>
+    <div class="r"><span class="no">02</span><span><b>好脂肪优先</b>——Ω-3（深海鱼/亚麻籽/核桃）当家，少油炸、少反式脂肪。</span></div>
+    <div class="r"><span class="no">03</span><span><b>少精制糖与超加工</b>——血糖过山车就是慢性炎症的加速器；甜味交给水果和黑巧。</span></div>
+  </div>
+</section>
+
+<footer>
+  <span class="dis">本站为生活方式灵感参考，非医疗建议；身体不适请咨询医生。</span>
+  <span>GLOW · DAILY</span>
+</footer>
+<div id="toast"></div>
+
+<script>
+/* ============ 内容池（每日轮换） ============ */
+const POOL = {
+  hero:["先喝水，再做大事","清醒是练出来的","把今天过成一张字帖","能量是可以自己发的","薄肌是慢功夫，别急","今天的你，比昨天多 250ml","轻盈但有力气","身体是会被好好对待的"],
+  morning:[
+    {t:"拉开窗帘晒 10 分钟晨光",n:"晨光校准生物钟，血清素开机，比咖啡因更根本"},
+    {t:"冷水洗脸 30 秒",n:"唤醒迷走神经，脸和脑子一起开机"},
+    {t:"5 分钟唤醒拉伸：猫牛式+下犬式",n:"叫醒整条脊柱，久坐党今日份的脊柱保养"},
+    {t:"写下今天最重要的 3 件事",n:"只写 3 件——写 10 件等于没写"},
+    {t:"醒来第一小时不碰手机",n:"把注意力的第一口奶留给自己"},
+    {t:"窗边深呼吸 10 轮（吸4-屏4-呼8）",n:"呼气比吸气长，副交感神经立刻上班"}],
+  breakfast:[
+    {t:"燕麦奇亚籽碗 + 蓝莓 + 核桃",n:"β-葡聚糖+Ω-3+花青素一碗全齐，肉桂调味不加糖"},
+    {t:"全麦贝果 + 牛油果 + 水波蛋",n:"单不饱和脂肪酸配优质蛋白，饱到中午"},
+    {t:"希腊酸奶 + 树莓 + 南瓜籽 + 亚麻籽粉",n:"发酵食品是抗炎饮食的常驻嘉宾"},
+    {t:"菠菜蘑菇欧姆蛋 + 全麦吐司 + 半个西柚",n:"叶酸+维 D+维 C 的早晨组合"},
+    {t:"紫薯 + 无糖豆浆 + 水煮蛋",n:"中式抗炎早餐：粗粮+豆+蛋，血糖平稳开局"},
+    {t:"隔夜燕麦：燕麦+杏仁奶+奇亚籽+香蕉",n:"睡前 3 分钟拌好，醒来直接吃"},
+    {t:"烟熏三文鱼全麦三明治 + 生菜 + 芥末籽",n:"Ω-3 早餐日，一周吃两次深海鱼"},
+    {t:"小米南瓜粥 + 茶叶蛋 + 凉拌菠菜",n:"对胃友好的中式早餐，菠菜焯水去草酸"},
+    {t:"厚酸奶吐司 + 蜂蜜 + 草莓 + 薄荷",n:"看起来像甜品，蛋白质其实很高"},
+    {t:"鸡蛋蔬菜沙拉碗 + 橄榄油黑醋汁",n:"特级初榨橄榄油是多酚大户"}],
+  lunch:[
+    {t:"香煎三文鱼 + 藜麦 + 西兰花",n:"Ω-3 携手十字花科，抗炎界的天作之合"},
+    {t:"姜黄鸡肉糙米碗",n:"姜黄+黑胡椒同撒，胡椒碱让姜黄素吸收率翻倍"},
+    {t:"味噌豆腐海带汤 + 杂粮饭 + 凉拌秋葵",n:"发酵味噌+海藻多糖，日式抗炎一套"},
+    {t:"彩虹沙拉：羽衣甘蓝+紫甘蓝+鹰嘴豆+圣女果",n:"颜色越杂，植物营养素越广，淋橄榄油帮吸收"},
+    {t:"番茄炖牛腩（瘦部位）+ 荞麦面",n:"番茄红素慢炖更出味，红肉每周不超两次"},
+    {t:"蒜蓉虾 + 糙米饭 + 蒜炒菠菜",n:"虾青素是大海送的抗氧化剂"},
+    {t:"鸡胸藜麦波奇碗：牛油果+毛豆+胡萝卜+海苔",n:"一碗吃出四色，拍照也好看"},
+    {t:"清蒸鲈鱼 + 小米饭 + 白灼芦笋",n:"清蒸是最高级的烹饪——保留营养也保留味道"},
+    {t:"意式鹰嘴豆汤 + 全麦恰巴塔",n:"豆类纤维喂饱肠道菌群，菌群开心你就开心"},
+    {t:"彩椒鸡肉卷饼：全麦饼+三色彩椒+洋葱",n:"维 C 满格的一餐，铁也更好吸收"}],
+  dinner:[
+    {t:"味噌三文鱼 + 烤时蔬（西葫芦/彩椒/口蘑）",n:"晚餐的鱼轻烹饪，睡前 3 小时吃完"},
+    {t:"虾仁豆腐煲 + 焯拌菜心 + 小份糙米饭",n:"高蛋白低负担，夜里不胀气"},
+    {t:"番茄菌菇鸡丝荞麦面",n:"一碗热汤面收尾，荞麦的芦丁顺便补上"},
+    {t:"香煎鳕鱼 + 芦笋 + 小份红薯",n:"鳕鱼柔嫩好消化，红薯给够满足感"},
+    {t:"韩式海带汤 + 杂粮饭 + 拌豆芽",n:"海带褐藻多糖+豆芽纤维，清清爽爽"},
+    {t:"蔬菜鸡蛋饼 + 无糖酸奶",n:"快手晚餐，10 分钟出锅的诚实一餐"},
+    {t:"泰式青柠蒸鱼 + 凉拌木耳",n:"青柠酸香开胃，木耳多糖刮油"},
+    {t:"火鸡胸生菜卷 + 藜麦沙拉",n:"生菜当饼，晚餐的碳水自觉减半"},
+    {t:"冬瓜虾仁汤 + 蒸山药 + 白灼芥蓝",n:"利水消肿，第二天不肿脸"},
+    {t:"彩虹蔬菜汤 + 全麦面包 + 水煮蛋",n:"一周一次的「肠胃轻断日」，让消化系统放假"}],
+  snackA:[
+    {t:"一小把蓝莓 + 树莓",n:"花青素小炸弹，抗炎零食天花板"},
+    {t:"热绿茶 + 原味巴旦木 10 颗",n:"EGCG + 维 E，上午的微充电"},
+    {t:"无糖希腊酸奶 + 奇亚籽",n:"蛋白质 15g+，磨平饥饿波动"},
+    {t:"苹果片 + 一勺花生酱",n:"纤维+好脂肪，甜咸党的高配"},
+    {t:"无糖抹茶拿铁（燕麦奶底）",n:"茶氨酸让咖啡因变温柔，专注但不心慌"}],
+  snackB:[
+    {t:"黑巧 85% 两格 + 热绿茶",n:"可可黄烷醇护血管，微苦才是抗炎的味"},
+    {t:"小胡萝卜条 + 鹰嘴豆泥",n:"咔嚓咔嚓的解压零食，β-胡萝卜素免费送"},
+    {t:"樱桃番茄 + 马苏里拉小球",n:"意式小食，番茄红素遇油更吸收"},
+    {t:"橙子一个 + 原味核桃 3 颗",n:"维 C+Ω-3，皮肤和脑子都领到"},
+    {t:"无糖豆浆 + 一小把毛豆",n:"植物蛋白+大豆异黄酮，稳稳的下午"}],
+  train:[
+    {t:"下肢日：臀桥 3×15 · 箭步蹲 3×12 · 提踵 3×20",n:"薄肌靠臀腿线条撑起，练完走楼梯回家"},
+    {t:"上肢日：小哑铃弯举+侧平举+俯身飞鸟 各 3×12",n:"2kg 就够，肩线是衣架子的灵魂"},
+    {t:"核心日：死虫式 3×12 · 平板 3×45s · 侧板 3×30s",n:"核心稳=体态正，腰不塌背不驼"},
+    {t:"Pilates 全身 30min：滚背+百次拍击+单腿划圈",n:"拉长线条不粗壮，薄肌女孩的正统武器"},
+    {t:"户外快走 8000 步",n:"晒太阳补维 D，走完顺便买明天的莓果"},
+    {t:"瑜伽流：拜日式 A+B 各 5 轮",n:"一呼一吸一个动作，柔韧和力量同修"},
+    {t:"主动恢复：泡沫轴全身 15min",n:"训练日之间的秘密武器，第二天不酸是它给的"}],
+  recharge:[
+    {t:"20 分钟黄金午睡",n:"超过 30 分钟会进深睡，醒来反而更困"},
+    {t:"窗边散步 10 分钟，眼睛望向远处",n:"睫状肌放假，看绿树等于给眼睛做 SPA"},
+    {t:"咖啡因红线：14:00 后只喝绿茶",n:"咖啡因半衰期 6 小时，下午的咖啡偷走晚上的深睡"},
+    {t:"5 分钟颈肩拉伸",n:"体态急救：下巴后缩×10 + 肩绕环×20"},
+    {t:"4-7-8 呼吸三轮",n:"吸 4 秒屏 7 秒呼 8 秒，给交感神经踩刹车"}],
+  night:[
+    {t:"热水泡脚 15 分钟 + 手机放远处",n:"脚暖了核心降温，困意来得又准又稳"},
+    {t:"婴儿式+鸽子式拉伸",n:"髋部是情绪的仓库，打开它"},
+    {t:"纸质书 20 页",n:"屏幕换成纸页，褪黑素不会被蓝光偷走"},
+    {t:"写 3 行感恩日记",n:"只写今天真实发生的小事，再小都算"},
+    {t:"身体扫描冥想 10 分钟",n:"从脚趾到头顶逐段放松，多数人到膝盖就睡着"},
+    {t:"认真护肤 + 想好明天穿搭",n:"明早少一个决定，就多一分从容"}],
+  quest:[
+    {t:"今天不喝任何含糖饮料",n:"一杯奶茶的糖≈抗炎计划的一周白干"},
+    {t:"每餐饭后立刻走 10 分钟",n:"餐后血糖峰值直接削平，最便宜的控糖方式"},
+    {t:"每小时站起来活动 2 分钟",n:"久坐是新的慢性炎症源，设个整点闹钟"},
+    {t:"喝满 2500ml，做到比说难",n:"今天的水杯一个都不能剩"},
+    {t:"睡前 1 小时手机放客厅充电",n:"卧室只用来睡——这是睡眠科的行规"},
+    {t:"尝试一种没吃过的彩色蔬果",n:"肠道菌群喜欢新鲜的多样性"},
+    {t:"电梯改楼梯，至少 3 次",n:"碎片化训练，不占用任何额外时间"},
+    {t:"每口饭嚼 20 下再咽",n:"细嚼慢咽，给饱腹信号 20 分钟到场的礼貌"},
+    {t:"今天不开外卖，自己做一餐",n:"厨房 20 分钟，钠摄入少一半"},
+    {t:"走路收下巴沉肩，全程体态在线",n:"体态是穿在身上的第一件衣服"}]
+};
+const WATER = [
+  {tm:"07:00", ml:350, note:"夜里呼吸蒸发掉的水，先用温水还上"},
+  {tm:"08:10", ml:300, note:"早餐配水，细水长流"},
+  {tm:"11:30", ml:300, note:"午餐前一杯，胃先打招呼"},
+  {tm:"14:00", ml:300, note:"下午开场，别等渴了才喝"},
+  {tm:"16:30", ml:300, note:"加餐配水，继续给血液降粘"},
+  {tm:"19:40", ml:400, note:"训练后补水，出汗多的日子加点盐"},
+  {tm:"20:30", ml:250, note:"晚间最后一轮"},
+  {tm:"21:30", ml:200, note:"饮水收口——睡前 2 小时不再大量喝水，明早不肿"}
+];
+const CATS = {
+  water:{c:"var(--water-deep)",dot:"var(--water)",lab:"WATER"},
+  eat:{c:"var(--sage)",dot:"var(--sage)",lab:"ANTI-INFLAMMATORY MEAL"},
+  snack:{c:"var(--sun)",dot:"var(--sun)",lab:"SMART SNACK"},
+  train:{c:"var(--berry)",dot:"var(--berry)",lab:"TRAIN · THIN MUSCLE"},
+  recharge:{c:"var(--lav)",dot:"var(--lav)",lab:"RECHARGE"},
+  night:{c:"#7A8A94",dot:"#7A8A94",lab:"WIND DOWN"}
+};
+const KEY="energy_v1";
+let DAY = Math.floor(new Date(new Date().toLocaleDateString("en-CA")).getTime()/864e5);
+let LOG = {};
+try{ LOG = JSON.parse(localStorage.getItem(KEY+":"+DAY)||"{}")||{}; }catch(e){}
+const PRIME = {breakfast:3, lunch:7, dinner:3, snackA:2, snackB:3, train:3, morning:5, recharge:2, night:1, quest:7, hero:5};
+const SHIFT = {breakfast:0, lunch:2, dinner:5, snackA:1, snackB:4, train:0, morning:3, recharge:2, night:5, quest:6, hero:1};
+const off = (slot)=>(DAY*PRIME[slot]+SHIFT[slot])%POOL[slot].length;
+function save(){ localStorage.setItem(KEY+":"+DAY, JSON.stringify(LOG)); }
+function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),1600); }
+const CF=["#7FB5D5","#C96A8B","#F2C94C","#8FAE8B","#FFFFFF"];
+function burst(x,y,n){ for(let k=0;k<n;k++){ const p=document.createElement("div"); p.className="cf";
+  const s=4+Math.random()*5, c=CF[Math.floor(Math.random()*CF.length)];
+  p.style.cssText=`left:${x}px;top:${y}px;width:${s}px;height:${s}px;background:${c}`;
+  const tx=(Math.random()-.5)*220, ty=-Math.random()*180-30, r=(Math.random()-.5)*500;
+  document.body.appendChild(p);
+  p.animate([{transform:"translate(0,0) rotate(0)",opacity:1},{transform:`translate(${tx}px,${ty}px) rotate(${r}deg)`,opacity:0}],{duration:600+Math.random()*400,easing:"cubic-bezier(.2,.7,.3,1)"}).onfinish=()=>p.remove(); } }
+function rowHTML(id, tm, catKey, title, note, isFix){
+  const C = CATS[catKey], done = !!LOG[id];
+  return `<div class="row ${done?"done":""}" id="${id}" style="--dot:${C.dot}">
+    <div class="tm">${tm}</div><div class="rail"></div>
+    <div class="body"><div class="cat" style="color:${C.c}">${C.lab}${isFix?'<span class="fix">固定</span>':""}</div>
+    <div class="txt">${title}</div>${note?`<div class="note">${note}</div>`:""}</div>
+    <div class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12.5 10 18.5 20 6"/></svg></div></div>`;
+}
+function render(){
+  const now = new Date();
+  const wd = "日一二三四五六"[now.getDay()];
+  const doy = Math.floor((now - new Date(now.getFullYear(),0,0))/864e5);
+  document.getElementById("hero").textContent = "「"+POOL.hero[off("hero")]+"」";
+  document.getElementById("dline").innerHTML =
+    `<b>${now.getMonth()+1} 月 ${now.getDate()} 日 · 星期${wd}</b> · 一年的第 ${doy} 天 · GLOW DAY NO.${DAY}`;
+  document.getElementById("sub").innerHTML =
+    `她是那种<span class="h">喝大水、吃抗炎饮食、一身薄肌</span>的女孩——今天的时间轴已就位：三餐和训练每天换新，温水和早睡永远是老规矩。<b>过了 0 点自动翻页。</b>`;
+  const q = POOL.quest[off("quest")];
+  document.getElementById("chTxt").textContent = q.t + " —— " + q.n;
+  const cups = document.getElementById("cups");
+  cups.innerHTML = WATER.map((w,i)=>`<div class="cup ${LOG["w"+i]?"on":""}" data-i="${i}" title="${w.tm} · ${w.ml}ml"><i></i></div>`).join("");
+  const total = WATER.reduce((s,w,i)=>s+(LOG["w"+i]?w.ml:0),0);
+  document.getElementById("hyN").textContent = total+" / "+WATER.reduce((s,w)=>s+w.ml,0)+" ml";
+  const b = POOL.breakfast[off("breakfast")], l = POOL.lunch[off("lunch")], dn = POOL.dinner[off("dinner")];
+  const sa = POOL.snackA[off("snackA")], sb = POOL.snackB[off("snackB")];
+  const tr = POOL.train[off("train")], mo = POOL.morning[off("morning")], rc = POOL.recharge[off("recharge")], ni = POOL.night[off("night")];
+  const rows = [
+    ["wake","07:00","water","起床 · 温水 350ml","昨夜失水先还上，肠胃被轻轻叫醒",true],
+    ["m1","07:20","recharge","晨间仪式 · "+mo.t,mo.n,false],
+    ["b1","08:00","eat","早餐 · "+b.t,b.n,false],
+    ["focus","09:30","recharge","专注时段 ①（90 分钟深工作）","最难的脑力活在上午干，接水当休息",true],
+    ["sa","11:15","snack","上午加餐 · "+sa.t,sa.n,false],
+    ["w11","11:30","water","午餐前 300ml","饭前水的仪式感：胃知道饭要来了",true],
+    ["l1","13:00","eat","午餐 · "+l.t,l.n,false],
+    ["rc","14:30","recharge","午后充电 · "+rc.t,rc.n,false],
+    ["sb","16:30","snack","下午加餐 · "+sb.t,sb.n,false],
+    ["tr","17:30","train","训练 · "+tr.t,tr.n,false],
+    ["w19","19:00","water","训练后补水 400ml","电解质可选：出汗多就加一小撮盐",true],
+    ["dn","19:30","eat","晚餐 · "+dn.t,dn.n,false],
+    ["ni","21:00","night","晚间仪式 · "+ni.t,ni.n,false],
+    ["cut","21:30","water","今日饮水收口","睡前 2 小时停大水，明早的脸不肿",true],
+    ["sk","22:45","night","护肤 + 调暗灯光","暖光只留一盏，褪黑素开始排班",true],
+    ["sl","23:15","night","关灯 · 睡满 7.5 小时","睡眠是最强的天然抗炎药，没有之一",true]
+  ];
+  document.getElementById("rows").innerHTML = rows.map(r=>rowHTML(...r)).join("");
+  document.getElementById("rows").querySelectorAll(".row").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const id = el.id; LOG[id] = !LOG[id];
+      if(LOG[id]){ const r=el.getBoundingClientRect(); burst(r.left+60,r.top+16,10); }
+      else { delete LOG[id]; }
+      save(); render();
+    });
+  });
+  document.getElementById("tlMeta").textContent = "TIMELINE /// " + rows.length + " BLOCKS";
+}
+document.getElementById("cups").addEventListener("click",e=>{
+  const c = e.target.closest(".cup"); if(!c) return;
+  const i = +c.dataset.i; LOG["w"+i] = !LOG["w"+i];
+  if(LOG["w"+i]){ const r=c.getBoundingClientRect(); burst(r.left+17,r.top+10,8); }
+  save(); render();
+  const total = WATER.reduce((s,w,i)=>s+(LOG["w"+i]?w.ml:0),0);
+  if(total >= WATER.reduce((s,w)=>s+w.ml,0)) toast("大水女孩认证 /// 喝满一整天");
+});
+render();
+let curDay = DAY;
+setInterval(()=>{
+  const d = Math.floor(new Date(new Date().toLocaleDateString("en-CA")).getTime()/864e5);
+  if(d !== curDay){ curDay = d; DAY = d; LOG = {}; render(); toast("新的一天已翻页 /// 先喝温水"); }
+}, 30000);
+</script>
+</body>
+</html>
